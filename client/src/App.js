@@ -1,16 +1,22 @@
 import React from 'react';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
 
-const client = new ApolloClient({
-  uri: '/graphql'
+
+const httpLink = createHttpLink({
+  uri: '/graphql',
 });
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
+
 
 function App() {
   return (
